@@ -19,13 +19,16 @@ public class Display extends JFrame{
 	private String roadName;   //name of the street in string form
 	private readFromFile reader; //the reader object that gets speed limit from the file
 	private int speedLimit;  //the speed limit obtained from the file
-	private int currentSpeed = 70; //the current speed of the vehicle
+	private int currentSpeed = 0; //the current speed of the vehicle
 	private JLayeredPane p;  // the layered pane that holds all the other graphical objects
  	private JLabel currSpeed;  //the label on the gui that displays the current speed
 	private JButton up;  //the button that increases the current speed on the gui
 	private JButton down;  //the button that decreases the current speed on the gui
 	private Sound beep = new Sound("Beep.wav");  //the sound file played by excessive current speed
 	private String type; //the type of speedometer displayed on the gui-analog vs digital
+	private SpeedometerLabel speedometer; //the speedometer image
+	private int speedX = 70;
+	private int speedY = 240;
 
 
 	/**
@@ -58,9 +61,9 @@ public class Display extends JFrame{
 		type = (String)JOptionPane.showInputDialog(frame, "Choose the display type you want to use: ", "Display Options", JOptionPane.QUESTION_MESSAGE, null, options, options[1]);  // input dialog to choose between digital and analog display
 
 		if(type.equals("Analog")){
-			JLabel speedometer = new JLabel(new ImageIcon("speedometer.jpg")); //paints speedometer to screen
+			speedometer = new SpeedometerLabel(new ImageIcon("speedometer.jpg"), 157,162, speedX, speedY); //paints speedometer to screen
 			speedometer.setBounds(325, 50, 300, 300);
-			p.add(speedometer, new Integer(3));
+			p.add(speedometer, new Integer(4));
 		}else {															//sets gui to digital mode
 			currSpeed.setFont(new Font("Arial", Font.BOLD, 130));		//sets font of current speed label
 			currSpeed.setBounds(350,100,300,200);
@@ -137,12 +140,18 @@ public class Display extends JFrame{
 					compareSpeeds();
 				}else if(event.getSource() == down){							// processes button events when format is digital
 					currentSpeed--;
+					if(currentSpeed < 0){
+						currentSpeed = 0;
+					}
 					currSpeed.setText(Integer.toString(currentSpeed));
 					compareSpeeds();
 				}
 			}else{
 				if(event.getSource() == up){
-					currentSpeed++;										
+					currentSpeed++;	
+					//speedX-=1;
+					//speedY-=3;
+					//speedometer.refresh(speedX, speedY);									
 					compareSpeeds();
 				}else if(event.getSource() == down){							// processes button events when format is analog
 					currentSpeed--;
