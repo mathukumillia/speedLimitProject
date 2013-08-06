@@ -17,8 +17,8 @@ public class readFromFile {
 	*
 	**/
 	public readFromFile() throws FileNotFoundException{
-		reader =  new Scanner(new File("C:/Users/Anirudh/Documents/GitHub/FinalSpeedLimitProject/speedLimits.txt"));	//change these paths to wherever your speedLimits.txt file
-		abbrevs = new Scanner(new File("C:/Users/Anirudh/Documents/GitHub/FinalSpeedLimitProject/abbreviations.txt"));
+		reader =  new Scanner(new File("C:/Users/owners/Documents/GitHub/FinalSpeedLimitProject/speedLimits.txt"));	//change these paths to wherever your speedLimits.txt file
+		abbrevs = new Scanner(new File("C:/Users/owners/Documents/GitHub/FinalSpeedLimitProject/abbreviations.txt"));
 	}
 
 	/**
