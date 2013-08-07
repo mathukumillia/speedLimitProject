@@ -55,7 +55,7 @@ public class Display extends JFrame{
 
 		currSpeed = new JLabel(Integer.toString(currentSpeed));		//initializes current speed JLabel
 
-		final String[] options = {"Analog", "Digital"};
+		final String[] options = {"Digital", "Digital"};				//change this for access to analog
 
 		JFrame frame = new JFrame();
 		type = (String)JOptionPane.showInputDialog(frame, "Choose the display type you want to use: ", "Display Options", JOptionPane.QUESTION_MESSAGE, null, options, options[1]);  // input dialog to choose between digital and analog display
@@ -160,9 +160,9 @@ public class Display extends JFrame{
 			}else{
 				if(event.getSource() == up){
 					currentSpeed++;	
-					//speedX-=1;
-					//speedY-=3;
-					//speedometer.refresh(speedX, speedY);									
+					speedX-=1;
+					speedY-=3;
+					speedometer.refresh(speedX, speedY);									
 					compareSpeeds();
 				}else if(event.getSource() == down){							// processes button events when format is analog
 					currentSpeed--;
