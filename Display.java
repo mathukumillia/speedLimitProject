@@ -60,6 +60,10 @@ public class Display extends JFrame{
 		JFrame frame = new JFrame();
 		type = (String)JOptionPane.showInputDialog(frame, "Choose the display type you want to use: ", "Display Options", JOptionPane.QUESTION_MESSAGE, null, options, options[1]);  // input dialog to choose between digital and analog display
 
+		if(type == null){
+			type = "Digital";
+		}
+
 		if(type.equals("Analog")){
 			speedometer = new SpeedometerLabel(new ImageIcon("speedometer.jpg"), 157,162, speedX, speedY); //paints speedometer to screen
 			speedometer.setBounds(325, 50, 300, 300);
@@ -86,8 +90,15 @@ public class Display extends JFrame{
 		p.add(up, new Integer(3));
 		p.add(down, new Integer(3));
 
-
-		roadName = JOptionPane.showInputDialog("Enter street");
+		boolean firstTime = true;
+		while(roadName == null){
+			if(firstTime){
+				roadName = JOptionPane.showInputDialog("Enter a street");
+				firstTime = false;
+			}else{
+				roadName = JOptionPane.showInputDialog("Sorry, you must enter a street: ");
+			}
+		}	
 		speedLimit = Integer.parseInt(reader.getSpeedLimit(roadName));		//displayes popup and takes in street name
 		speed.setText("" + speedLimit);
 		compareSpeeds();
